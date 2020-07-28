@@ -1,3 +1,4 @@
+#pragma once
 #include <string>
 
 class Account {
@@ -11,7 +12,7 @@ public:
     }
 
     void withdrawMoney(size_t amount) {
-        if (amount < balance_) {
+        if (canWithdraw(amount)) {
             balance_ -= amount;
         }
     }
@@ -20,8 +21,12 @@ public:
         balance_ += amount;
     }
 
+    bool canWithdraw(size_t amount) const {
+        return amount < balance_;
+    }
+
 private:
-    std::string cardNumber_;  //for login
+    std::string cardNumber_;
     std::string pin_;
     size_t balance_;
     //withdrawlimit?
